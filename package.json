@@ -5,12 +5,13 @@
   "main": "index.js",
   "scripts": {
     "dev": "parcel index.html",
-    "build" :"parcel build index.html"
+    "build": "parcel build index.html"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "cssnano": "^4.1.10",
     "sass": "^1.28.0"
   },
   "dependencies": {
