@@ -1,0 +1,20 @@
+{
+  "name": "dobremiejsce",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "dev": "parcel index.html"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "sass": "^1.28.0"
+  },
+  "dependencies": {
+    "bootstrap-4-grid": "^3.4.0",
+    "jump.js": "^1.0.2",
+    "swiper": "^6.3.5"
+  }
+}
