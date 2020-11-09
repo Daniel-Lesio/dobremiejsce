@@ -8,7 +8,58 @@
 @import './scss/footer';
 @import './scss/onas';
 @import './scss/gallery';
+@import './scss/dzieci';
+@import './scss/okolica';
+@import './scss/domki';
+@import './scss/oferta';
+@import './scss/youtube';
+@import './scss/insta';
+@import './scss/info';
+@import './scss/kontakt';
+@import './scss/rekomendacje';
+@import './scss/preloader';
 
+.no-wrap{
+    white-space: nowrap;
+}
+.cp{
+    cursor: pointer;
+    &:hover{
+        opacity: .9;
+    }
+}
+.up{
+    position: absolute;
+    top: -28px;
+    right: 0;
+    cursor: pointer;
+    &:hover{
+        svg{
+            circle{
+                fill : $primary;
+            }
+            path{
+                stroke : $secondary;
+            }
+            .path-up{
+                fill : $secondary;
+            }
+        }
+    }
+}
+h1{
+font-size: 32px;
+font-style: normal;
+font-weight: 700;
+line-height: 48px;
+letter-spacing: 0px;
+text-align: center;
+
+}
+.my-1{
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
 .pb-2{
     padding-bottom: 64px;
     margin-bottom: 64px;
@@ -16,7 +67,7 @@
 section{
     min-height: 50vh;
     &:nth-child(even){
-        background: #ddd;
+        // background: #ddd;
     }
 }
 .cont{
@@ -41,3 +92,20 @@ section{
 .text-right{
     text-align: right;
 }
+
+.mb-24{
+    margin-bottom: 24px;
+}
+
+.messenger{
+    opacity: 0;
+    display: none;
+    position: fixed;
+    bottom: 50px;
+    right: 50px;
+    z-index: 100;
+    width: 56px;
+    height: 56px;
+    
+}
+

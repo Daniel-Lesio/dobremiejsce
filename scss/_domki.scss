@@ -1,0 +1,38 @@
+#domki{
+    background: #E6ECE7;
+    padding-top: 40px;
+    padding-bottom: 40px;
+    .grid-domki{
+        h1{
+            white-space: nowrap;
+            
+        }
+        display: grid;
+        grid-template-columns: repeat(1,1fr);
+        @media (min-width : 768px) {
+            grid-template-columns: repeat(3,1fr)!important;
+        }
+        gap: 3rem;
+        .domki-1{
+            font-size: 16px;
+            font-style: normal;
+            font-weight: 400;
+            line-height: 24px;
+            letter-spacing: 0px;
+            text-align: left;
+            ul{
+                list-style-type: disc;
+            }
+        }
+        .domki-2{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .domki-3{
+
+        }
+        
+    }
+    
+}

@@ -46,8 +46,10 @@ body{
     .left{
         width: 50%;
         display: flex;
+        align-items: center;
+        justify-content: center;
         flex-direction: column;
-        h1{
+        h5{
             height: 50%;
             line-height: 24px;
             display: flex;
@@ -57,6 +59,9 @@ body{
         .rz{
             font-weight: 700;
         }
+    }
+    .center{
+        
     }
     .right{
         width: 50%;

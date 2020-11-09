@@ -19,6 +19,10 @@ h2{
     }
 .active{
     font-weight: 700;
+    border-bottom: solid $primary 2px;
+    &::after{
+        content: '';
+    }
 }
 
 

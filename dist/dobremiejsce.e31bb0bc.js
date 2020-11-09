@@ -117,7 +117,79 @@ parcelRequire = (function (modules, cache, entry, globalName) {
   }
 
   return newRequire;
-})({"scripts/mobilemenu.js":[function(require,module,exports) {
+})({"node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
+var bundleURL = null;
+
+function getBundleURLCached() {
+  if (!bundleURL) {
+    bundleURL = getBundleURL();
+  }
+
+  return bundleURL;
+}
+
+function getBundleURL() {
+  // Attempt to find the URL of the current script and use that as the base URL
+  try {
+    throw new Error();
+  } catch (err) {
+    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
+
+    if (matches) {
+      return getBaseURL(matches[0]);
+    }
+  }
+
+  return '/';
+}
+
+function getBaseURL(url) {
+  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
+}
+
+exports.getBundleURL = getBundleURLCached;
+exports.getBaseURL = getBaseURL;
+},{}],"node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
+var bundle = require('./bundle-url');
+
+function updateLink(link) {
+  var newLink = link.cloneNode();
+
+  newLink.onload = function () {
+    link.remove();
+  };
+
+  newLink.href = link.href.split('?')[0] + '?' + Date.now();
+  link.parentNode.insertBefore(newLink, link.nextSibling);
+}
+
+var cssTimeout = null;
+
+function reloadCSS() {
+  if (cssTimeout) {
+    return;
+  }
+
+  cssTimeout = setTimeout(function () {
+    var links = document.querySelectorAll('link[rel="stylesheet"]');
+
+    for (var i = 0; i < links.length; i++) {
+      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
+        updateLink(links[i]);
+      }
+    }
+
+    cssTimeout = null;
+  }, 50);
+}
+
+module.exports = reloadCSS;
+},{"./bundle-url":"node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/bootstrap-4-grid/css/grid.min.css":[function(require,module,exports) {
+var reloadCSS = require('_css_loader');
+
+module.hot.dispose(reloadCSS);
+module.hot.accept(reloadCSS);
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"scripts/mobilemenu.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12185,79 +12257,12 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 var components = [];
 
 _coreClass.default.use(components);
-},{"./esm/components/core/core-class":"node_modules/swiper/esm/components/core/core-class.js","./esm/components/virtual/virtual":"node_modules/swiper/esm/components/virtual/virtual.js","./esm/components/keyboard/keyboard":"node_modules/swiper/esm/components/keyboard/keyboard.js","./esm/components/mousewheel/mousewheel":"node_modules/swiper/esm/components/mousewheel/mousewheel.js","./esm/components/navigation/navigation":"node_modules/swiper/esm/components/navigation/navigation.js","./esm/components/pagination/pagination":"node_modules/swiper/esm/components/pagination/pagination.js","./esm/components/scrollbar/scrollbar":"node_modules/swiper/esm/components/scrollbar/scrollbar.js","./esm/components/parallax/parallax":"node_modules/swiper/esm/components/parallax/parallax.js","./esm/components/zoom/zoom":"node_modules/swiper/esm/components/zoom/zoom.js","./esm/components/lazy/lazy":"node_modules/swiper/esm/components/lazy/lazy.js","./esm/components/controller/controller":"node_modules/swiper/esm/components/controller/controller.js","./esm/components/a11y/a11y":"node_modules/swiper/esm/components/a11y/a11y.js","./esm/components/history/history":"node_modules/swiper/esm/components/history/history.js","./esm/components/hash-navigation/hash-navigation":"node_modules/swiper/esm/components/hash-navigation/hash-navigation.js","./esm/components/autoplay/autoplay":"node_modules/swiper/esm/components/autoplay/autoplay.js","./esm/components/effect-fade/effect-fade":"node_modules/swiper/esm/components/effect-fade/effect-fade.js","./esm/components/effect-cube/effect-cube":"node_modules/swiper/esm/components/effect-cube/effect-cube.js","./esm/components/effect-flip/effect-flip":"node_modules/swiper/esm/components/effect-flip/effect-flip.js","./esm/components/effect-coverflow/effect-coverflow":"node_modules/swiper/esm/components/effect-coverflow/effect-coverflow.js","./esm/components/thumbs/thumbs":"node_modules/swiper/esm/components/thumbs/thumbs.js"}],"../.nvm/versions/node/v12.18.3/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)\/[^/]+$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../.nvm/versions/node/v12.18.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js":[function(require,module,exports) {
-var bundle = require('./bundle-url');
-
-function updateLink(link) {
-  var newLink = link.cloneNode();
-
-  newLink.onload = function () {
-    link.remove();
-  };
-
-  newLink.href = link.href.split('?')[0] + '?' + Date.now();
-  link.parentNode.insertBefore(newLink, link.nextSibling);
-}
-
-var cssTimeout = null;
-
-function reloadCSS() {
-  if (cssTimeout) {
-    return;
-  }
-
-  cssTimeout = setTimeout(function () {
-    var links = document.querySelectorAll('link[rel="stylesheet"]');
-
-    for (var i = 0; i < links.length; i++) {
-      if (bundle.getBaseURL(links[i].href) === bundle.getBundleURL()) {
-        updateLink(links[i]);
-      }
-    }
-
-    cssTimeout = null;
-  }, 50);
-}
-
-module.exports = reloadCSS;
-},{"./bundle-url":"../.nvm/versions/node/v12.18.3/lib/node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"node_modules/swiper/swiper-bundle.css":[function(require,module,exports) {
+},{"./esm/components/core/core-class":"node_modules/swiper/esm/components/core/core-class.js","./esm/components/virtual/virtual":"node_modules/swiper/esm/components/virtual/virtual.js","./esm/components/keyboard/keyboard":"node_modules/swiper/esm/components/keyboard/keyboard.js","./esm/components/mousewheel/mousewheel":"node_modules/swiper/esm/components/mousewheel/mousewheel.js","./esm/components/navigation/navigation":"node_modules/swiper/esm/components/navigation/navigation.js","./esm/components/pagination/pagination":"node_modules/swiper/esm/components/pagination/pagination.js","./esm/components/scrollbar/scrollbar":"node_modules/swiper/esm/components/scrollbar/scrollbar.js","./esm/components/parallax/parallax":"node_modules/swiper/esm/components/parallax/parallax.js","./esm/components/zoom/zoom":"node_modules/swiper/esm/components/zoom/zoom.js","./esm/components/lazy/lazy":"node_modules/swiper/esm/components/lazy/lazy.js","./esm/components/controller/controller":"node_modules/swiper/esm/components/controller/controller.js","./esm/components/a11y/a11y":"node_modules/swiper/esm/components/a11y/a11y.js","./esm/components/history/history":"node_modules/swiper/esm/components/history/history.js","./esm/components/hash-navigation/hash-navigation":"node_modules/swiper/esm/components/hash-navigation/hash-navigation.js","./esm/components/autoplay/autoplay":"node_modules/swiper/esm/components/autoplay/autoplay.js","./esm/components/effect-fade/effect-fade":"node_modules/swiper/esm/components/effect-fade/effect-fade.js","./esm/components/effect-cube/effect-cube":"node_modules/swiper/esm/components/effect-cube/effect-cube.js","./esm/components/effect-flip/effect-flip":"node_modules/swiper/esm/components/effect-flip/effect-flip.js","./esm/components/effect-coverflow/effect-coverflow":"node_modules/swiper/esm/components/effect-coverflow/effect-coverflow.js","./esm/components/thumbs/thumbs":"node_modules/swiper/esm/components/thumbs/thumbs.js"}],"node_modules/swiper/swiper-bundle.css":[function(require,module,exports) {
 var reloadCSS = require('_css_loader');
 
 module.hot.dispose(reloadCSS);
 module.hot.accept(reloadCSS);
-},{"_css_loader":"../.nvm/versions/node/v12.18.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"scripts/swipers.js":[function(require,module,exports) {
+},{"_css_loader":"node_modules/parcel-bundler/src/builtins/css-loader.js"}],"scripts/swipers.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -12289,13 +12294,10 @@ var swipers = function swipers() {
 };
 
 exports.swipers = swipers;
-},{"swiper":"node_modules/swiper/swiper.esm.js","swiper/swiper-bundle.css":"node_modules/swiper/swiper-bundle.css"}],"node_modules/bootstrap-4-grid/css/grid.min.css":[function(require,module,exports) {
-var reloadCSS = require('_css_loader');
-
-module.hot.dispose(reloadCSS);
-module.hot.accept(reloadCSS);
-},{"_css_loader":"../.nvm/versions/node/v12.18.3/lib/node_modules/parcel-bundler/src/builtins/css-loader.js"}],"index.js":[function(require,module,exports) {
+},{"swiper":"node_modules/swiper/swiper.esm.js","swiper/swiper-bundle.css":"node_modules/swiper/swiper-bundle.css"}],"index.js":[function(require,module,exports) {
 "use strict";
+
+require("bootstrap-4-grid");
 
 var _scrolling = require("./scripts/scrolling");
 
@@ -12305,18 +12307,47 @@ var _mobilemenu = require("./scripts/mobilemenu");
 
 var _swipers = require("./scripts/swipers");
 
-require("bootstrap-4-grid");
-
-(0, _jumps.jumps)();
-(0, _scrolling.scrolling)();
-(0, _mobilemenu.mobilemenu)();
-(0, _swipers.swipers)();
 var menuFixedIcon = document.querySelector(".menu-fixed-icon");
 var menuFixedNav = document.querySelector(".menu-fixed-nav");
-menuFixedIcon.addEventListener("click", function () {
-  menuFixedNav.classList.toggle("show-menu-fixed-nav");
+var oferta8 = document.querySelector('.oferta8');
+var oferta6 = document.querySelector('.oferta6');
+var preloader = document.querySelector(".preloader");
+window.addEventListener('load', function () {
+  preloader.classList.add('d-none');
+  (0, _jumps.jumps)();
+  (0, _scrolling.scrolling)();
+  (0, _mobilemenu.mobilemenu)();
+  (0, _swipers.swipers)();
+  menuFixedIcon.addEventListener("click", function () {
+    menuFixedNav.classList.toggle("show-menu-fixed-nav");
+  });
+  oferta6.addEventListener('click', function () {
+    oferta8.classList.remove("btn--active");
+    oferta6.classList.add("btn--active");
+    document.querySelector('.oferta-1 .cena').innerHTML = '350 zł';
+    document.querySelector('.oferta-2 .cena').innerHTML = '450 zł';
+    document.querySelector('.oferta-3 .cena').innerHTML = '550 zł';
+    document.querySelector('.oferta-4 .cena').innerHTML = '250 zł';
+  });
+  oferta8.addEventListener('click', function () {
+    oferta6.classList.remove("btn--active");
+    oferta8.classList.add("btn--active");
+    document.querySelector('.oferta-1 .cena').innerHTML = '450 zł';
+    document.querySelector('.oferta-2 .cena').innerHTML = '550 zł';
+    document.querySelector('.oferta-3 .cena').innerHTML = '650 zł';
+    document.querySelector('.oferta-4 .cena').innerHTML = '350 zł';
+  });
+  var choices = document.querySelectorAll(".choices h2");
+  choices.forEach(function (choice) {
+    choice.addEventListener('click', function () {
+      choices.forEach(function (ch) {
+        return ch.classList.remove('active');
+      });
+      choice.classList.add('active');
+    });
+  });
 });
-},{"./scripts/scrolling":"scripts/scrolling.js","./scripts/jumps":"scripts/jumps.js","./scripts/mobilemenu":"scripts/mobilemenu.js","./scripts/swipers":"scripts/swipers.js","bootstrap-4-grid":"node_modules/bootstrap-4-grid/css/grid.min.css"}],"../.nvm/versions/node/v12.18.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"bootstrap-4-grid":"node_modules/bootstrap-4-grid/css/grid.min.css","./scripts/scrolling":"scripts/scrolling.js","./scripts/jumps":"scripts/jumps.js","./scripts/mobilemenu":"scripts/mobilemenu.js","./scripts/swipers":"scripts/swipers.js"}],"node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -12344,7 +12375,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "45143" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "42433" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -12520,5 +12551,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}]},{},["../.nvm/versions/node/v12.18.3/lib/node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
+},{}]},{},["node_modules/parcel-bundler/src/builtins/hmr-runtime.js","index.js"], null)
 //# sourceMappingURL=/dobremiejsce.e31bb0bc.js.map
